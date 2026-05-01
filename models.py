@@ -3,7 +3,9 @@
 
 import uuid
 
+# ==========================================
 # 1. OYUNCU SINIFI
+# ==========================================
 class Player:
     def __init__(self, nickname, address, connection=None):
         self.id = str(uuid.uuid4())[:8]  # Benzersiz 8 haneli ID
@@ -18,7 +20,9 @@ class Player:
         return {"id": self.id, "nickname": self.nickname, "is_ready": self.is_ready}
 
 
+# ==========================================
 # 2. KITA SINIFI
+# ==========================================
 class Continent:
     def __init__(self, name, bonus_troops, territories):
         self.name = name
@@ -27,7 +31,9 @@ class Continent:
         self.owner_id = None              # Kıtaya tamamen sahip olan oyuncunun ID'si
 
 
+# ==========================================
 # 3. BÖLGE (NODE) SINIFI
+# ==========================================
 class Territory:
     def __init__(self, name, continent_name):
         self.name = name
@@ -41,7 +47,9 @@ class Territory:
             self.neighbors.append(neighbor_name)
 
 
+# ==========================================
 # 4. HARİTA / OYUN DURUMU (GRAPH) SINIFI
+# ==========================================
 class Board:
     def __init__(self):
         self.territories = {}  # Tüm Graph düğümleri (Key: Bölge Adı, Value: Territory nesnesi)
@@ -119,7 +127,9 @@ class Board:
         return total_bonus
 
 
+# ==========================================
 # 5. ODA SINIFI
+# ==========================================
 class Room:
     def __init__(self, room_code):
         self.room_code = room_code
@@ -127,10 +137,14 @@ class Room:
         self.is_playing = False
         self.board = Board()       # Odaya özel harita (Graph)
         
-        # OYUN AKIŞI İÇİN DEĞİŞKENLER (Board'dan buraya taşındı)
+        # OYUN AKIŞI İÇİN DEĞİŞKENLER
         self.current_turn_player_id = None  # Sıradaki oyuncunun ID'si
         self.phase = "REINFORCEMENT"        # REINFORCEMENT, ATTACK, FORTIFY
         self.turn_count = 1
+        
+        # AŞAĞIDAKİ İKİ DEĞİŞKEN EKLENDİ!
+        self.remaining_time = 0             # Tur süresi sayacı
+        self.remaining_bonus_troops = 0     # Takviye evresinde dağıtılacak asker sayısı
 
     def add_player(self, player):
         if len(self.players) < 2:

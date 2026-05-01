@@ -4,6 +4,30 @@
 import random
 from models import Continent, Territory
 
+def start_turn(room):
+    """
+    Sırası gelen oyuncunun turunu başlatır, 
+    bonus askerlerini hesaplar ve süreleri ayarlar.
+    """
+    board = room.board
+    current_player_id = room.current_turn_player_id
+    
+    # 1. Aşama: REINFORCEMENT (Takviye)
+    room.phase = "REINFORCEMENT"
+    room.remaining_time = 30 # 30 saniye süre tanınır
+    
+    # Bonus Asker Hesaplama (Minimum 3 asker verilir)
+    # Oyuncunun sahip olduğu toplam bölge sayısı / 3
+    player_node_count = sum(1 for t in board.territories.values() if t.owner_id == current_player_id)
+    base_bonus = max(3, player_node_count // 3)
+    
+    # Kıta bonuslarını ekle (Eğer bir kıtanın tamamına sahipse)
+    continent_bonus = board.get_player_bonus(current_player_id)
+    
+    room.remaining_bonus_troops = base_bonus + continent_bonus
+    print(f"[TUR BAŞLADI] Oyuncu: {current_player_id} | Verilen Asker: {room.remaining_bonus_troops}")
+
+
 def setup_game(room):
     """
     Oda 2 kişiyle dolup herkes hazır olduğunda çağrılır.
@@ -105,3 +129,6 @@ def setup_game(room):
     
     # Dağıtım sonrası tamamen ele geçirilmiş şanslı kıta var mı diye kontrol et 
     board.update_continent_ownership()
+    
+    # İŞTE BURASI: Oyunun ilk turunu ve süreleri başlatıyoruz!
+    start_turn(room)
