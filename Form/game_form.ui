@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1100</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Risk Oyunu - Savaş</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="info_layout">
+     <item>
+      <widget class="QLabel" name="color_label">
+       <property name="text"><string>Renginiz: Bekleniyor...</string></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="turn_label">
+       <property name="text"><string>Sıra: Bekleniyor...</string></property>
+       <property name="styleSheet"><string>font-size: 16px; font-weight: bold;</string></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="phase_label">
+       <property name="text"><string>1. Evre: Takviye</string></property>
+       <property name="styleSheet"><string>font-size: 16px; font-weight: bold; color: darkblue;</string></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="time_label">
+       <property name="text"><string>Süre: --</string></property>
+       <property name="styleSheet"><string>font-size: 18px; font-weight: bold; color: orange;</string></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="troops_label">
+       <property name="text"><string>Bonus Asker: 0</string></property>
+       <property name="styleSheet"><string>font-size: 16px; font-weight: bold; color: green;</string></property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer"><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="action_button">
+       <property name="text"><string>Takviye Yap</string></property>
+       <property name="minimumSize"><size><width>120</width><height>40</height></size></property>
+       <property name="enabled"><bool>false</bool></property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="content_layout" stretch="7,3">
+     <item>
+      <layout class="QGridLayout" name="map_layout">
+
+       <item row="0" column="0">
+        <widget class="QFrame" name="frame_0_0">
+         <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+         <layout class="QGridLayout" name="gridLayout_0_0">
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="label_0_0">
+            <property name="text"><string>&lt;b&gt;Kuzey Amerika&lt;/b&gt;</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+
+          <item row="1" column="0">
+           <widget class="QPushButton" name="node_0">
+            <property name="text"><string>Node 0&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="1" column="1">
+           <widget class="QPushButton" name="node_1">
+            <property name="text"><string>Node 1&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="1" column="2">
+           <widget class="QPushButton" name="node_2">
+            <property name="text"><string>Node 2&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="0">
+           <widget class="QPushButton" name="node_3">
+            <property name="text"><string>Node 3&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="1">
+           <widget class="QPushButton" name="node_4">
+            <property name="text"><string>Node 4&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="2">
+           <widget class="QPushButton" name="node_5">
+            <property name="text"><string>Node 5&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="3" column="0">
+           <widget class="QPushButton" name="node_6">
+            <property name="text"><string>Node 6&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="3" column="1">
+           <widget class="QPushButton" name="node_7">
+            <property name="text"><string>Node 7&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="3" column="2">
+           <widget class="QPushButton" name="node_8">
+            <property name="text"><string>Node 8&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+         </layout>
+        </widget>
+       </item>
+
+       <item row="0" column="1">
+        <widget class="QFrame" name="frame_0_1">
+         <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+         <layout class="QGridLayout" name="gridLayout_0_1">
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="label_0_1">
+            <property name="text"><string>&lt;b&gt;Güney Amerika&lt;/b&gt;</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+
+          <item row="1" column="0">
+           <widget class="QPushButton" name="node_9">
+            <property name="text"><string>Node 9&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="1" column="1">
+           <widget class="QPushButton" name="node_10">
+            <property name="text"><string>Node 10&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="1" column="2">
+           <widget class="QPushButton" name="node_11">
+            <property name="text"><string>Node 11&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="0">
+           <widget class="QPushButton" name="node_12">
+            <property name="text"><string>Node 12&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+         </layout>
+        </widget>
+       </item>
+
+       <item row="0" column="2">
+        <widget class="QFrame" name="frame_0_2">
+         <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+         <layout class="QGridLayout" name="gridLayout_0_2">
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="label_0_2">
+            <property name="text"><string>&lt;b&gt;Avrupa&lt;/b&gt;</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+
+          <item row="1" column="0">
+           <widget class="QPushButton" name="node_19">
+            <property name="text"><string>Node 19&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="1" column="1">
+           <widget class="QPushButton" name="node_20">
+            <property name="text"><string>Node 20&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="1" column="2">
+           <widget class="QPushButton" name="node_21">
+            <property name="text"><string>Node 21&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="0">
+           <widget class="QPushButton" name="node_22">
+            <property name="text"><string>Node 22&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="1">
+           <widget class="QPushButton" name="node_23">
+            <property name="text"><string>Node 23&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="2">
+           <widget class="QPushButton" name="node_24">
+            <property name="text"><string>Node 24&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="3" column="0">
+           <widget class="QPushButton" name="node_25">
+            <property name="text"><string>Node 25&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+         </layout>
+        </widget>
+       </item>
+
+       <item row="1" column="0">
+        <widget class="QFrame" name="frame_1_0">
+         <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+         <layout class="QGridLayout" name="gridLayout_1_0">
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="label_1_0">
+            <property name="text"><string>&lt;b&gt;Afrika&lt;/b&gt;</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+
+          <item row="1" column="0">
+           <widget class="QPushButton" name="node_13">
+            <property name="text"><string>Node 13&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="1" column="1">
+           <widget class="QPushButton" name="node_14">
+            <property name="text"><string>Node 14&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="1" column="2">
+           <widget class="QPushButton" name="node_15">
+            <property name="text"><string>Node 15&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="0">
+           <widget class="QPushButton" name="node_16">
+            <property name="text"><string>Node 16&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="1">
+           <widget class="QPushButton" name="node_17">
+            <property name="text"><string>Node 17&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="2">
+           <widget class="QPushButton" name="node_18">
+            <property name="text"><string>Node 18&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+         </layout>
+        </widget>
+       </item>
+
+       <item row="1" column="1">
+        <widget class="QFrame" name="frame_1_1">
+         <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+         <layout class="QGridLayout" name="gridLayout_1_1">
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="label_1_1">
+            <property name="text"><string>&lt;b&gt;Asya&lt;/b&gt;</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+
+          <item row="1" column="0">
+           <widget class="QPushButton" name="node_26">
+            <property name="text"><string>Node 26&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="1" column="1">
+           <widget class="QPushButton" name="node_27">
+            <property name="text"><string>Node 27&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="1" column="2">
+           <widget class="QPushButton" name="node_28">
+            <property name="text"><string>Node 28&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="0">
+           <widget class="QPushButton" name="node_29">
+            <property name="text"><string>Node 29&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="1">
+           <widget class="QPushButton" name="node_30">
+            <property name="text"><string>Node 30&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="2">
+           <widget class="QPushButton" name="node_31">
+            <property name="text"><string>Node 31&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="3" column="0">
+           <widget class="QPushButton" name="node_36">
+            <property name="text"><string>Node 36&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="3" column="1">
+           <widget class="QPushButton" name="node_37">
+            <property name="text"><string>Node 37&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="3" column="2">
+           <widget class="QPushButton" name="node_38">
+            <property name="text"><string>Node 38&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="4" column="0">
+           <widget class="QPushButton" name="node_39">
+            <property name="text"><string>Node 39&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="4" column="1">
+           <widget class="QPushButton" name="node_40">
+            <property name="text"><string>Node 40&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="4" column="2">
+           <widget class="QPushButton" name="node_41">
+            <property name="text"><string>Node 41&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+         </layout>
+        </widget>
+       </item>
+
+       <item row="1" column="2">
+        <widget class="QFrame" name="frame_1_2">
+         <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+         <layout class="QGridLayout" name="gridLayout_1_2">
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="label_1_2">
+            <property name="text"><string>&lt;b&gt;Avustralya&lt;/b&gt;</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+
+          <item row="1" column="0">
+           <widget class="QPushButton" name="node_32">
+            <property name="text"><string>Node 32&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="1" column="1">
+           <widget class="QPushButton" name="node_33">
+            <property name="text"><string>Node 33&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="1" column="2">
+           <widget class="QPushButton" name="node_34">
+            <property name="text"><string>Node 34&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+          <item row="2" column="0">
+           <widget class="QPushButton" name="node_35">
+            <property name="text"><string>Node 35&#xa;Asker: ?</string></property>
+            <property name="minimumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="maximumSize"><size><width>80</width><height>60</height></size></property>
+            <property name="styleSheet"><string>background-color: #DDDDDD;</string></property>
+           </widget>
+          </item>
+
+         </layout>
+        </widget>
+       </item>
+
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="log_layout">
+       <item>
+        <widget class="QLabel" name="log_label">
+         <property name="text"><string>⚔️ Savaş Kayıtları</string></property>
+         <property name="alignment"><set>Qt::AlignCenter</set></property>
+         <property name="styleSheet"><string>font-weight: bold; font-size: 14px; color: darkred;</string></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="battle_log">
+         <property name="readOnly"><bool>true</bool></property>
+         <property name="minimumSize"><size><width>250</width><height>0</height></size></property>
+         <property name="styleSheet"><string>background-color: #FAFAFA; color: #333; font-size: 12px; border: 1px solid #CCC;</string></property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
