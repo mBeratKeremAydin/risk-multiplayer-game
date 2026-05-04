@@ -30,19 +30,19 @@
      <item>
       <widget class="QLabel" name="phase_label">
        <property name="text"><string>1. Evre: Takviye</string></property>
-       <property name="styleSheet"><string>font-size: 16px; font-weight: bold; color: darkblue;</string></property>
+             <property name="styleSheet"><string>font-size: 16px; font-weight: bold; color: black;</string></property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="time_label">
        <property name="text"><string>Süre: --</string></property>
-       <property name="styleSheet"><string>font-size: 18px; font-weight: bold; color: orange;</string></property>
+             <property name="styleSheet"><string>font-size: 18px; font-weight: bold; color: black;</string></property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="troops_label">
        <property name="text"><string>Bonus Asker: 0</string></property>
-       <property name="styleSheet"><string>font-size: 16px; font-weight: bold; color: green;</string></property>
+             <property name="styleSheet"><string>font-size: 16px; font-weight: bold; color: black;</string></property>
       </widget>
      </item>
      <item>
@@ -538,14 +538,14 @@
         <widget class="QLabel" name="log_label">
          <property name="text"><string>⚔️ Savaş Kayıtları</string></property>
          <property name="alignment"><set>Qt::AlignCenter</set></property>
-         <property name="styleSheet"><string>font-weight: bold; font-size: 14px; color: darkred;</string></property>
+                 <property name="styleSheet"><string>font-weight: bold; font-size: 14px; color: black;</string></property>
         </widget>
        </item>
        <item>
         <widget class="QTextEdit" name="battle_log">
          <property name="readOnly"><bool>true</bool></property>
          <property name="minimumSize"><size><width>250</width><height>0</height></size></property>
-         <property name="styleSheet"><string>background-color: #FAFAFA; color: #333; font-size: 12px; border: 1px solid #CCC;</string></property>
+                 <property name="styleSheet"><string>background-color: #FAFAFA; color: black; font-size: 12px; border: 1px solid #CCC;</string></property>
         </widget>
        </item>
       </layout>
