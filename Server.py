@@ -16,7 +16,7 @@ from game_engine import setup_game, start_turn
 # Projeyi teslim etmeden önce AWS sanal makinesine taşıdığında, 
 # dışarıdan gelen bağlantıları kabul edebilmesi için bunu '0.0.0.0' yapmalısın.
 # ==============================================================================
-HOST = '127.0.0.1'  
+HOST = '0.0.0.0'  
 PORT = 5555
 
 # --- EVRENSEL KOMŞULUK TABLOSU (Harita Bağlantıları) ---
