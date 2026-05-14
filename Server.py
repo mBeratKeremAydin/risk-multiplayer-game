@@ -10,6 +10,9 @@ from collections import deque  # BFS algoritmasında kuyruk (queue) yapısı iç
 from models import Player, Room
 from game_engine import setup_game, start_turn
 
+# Projenin kalbidir; bağlantıları dinleyen ve yöneten ana TCP Soket sunucusudur.
+# Oyuncuların odalara atanması ve paketlerin tüm istemcilere iletilmesi (broadcast) burada gerçekleşir.
+
 # ==============================================================================
 # AWS DEĞİŞİKLİĞİ İÇİN NOT:
 # Şimdilik kendi bilgisayarında (lokalde) test edeceğin için HOST'u 127.0.0.1 yaptık.

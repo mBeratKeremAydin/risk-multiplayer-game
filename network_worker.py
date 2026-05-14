@@ -6,6 +6,9 @@ import socket
 import json
 from PyQt5.QtCore import QThread, pyqtSignal
 
+# İstemci ile sunucu arasındaki TCP soket haberleşmesini sağlayan asenkron işçidir.
+# İşlemleri arka plan thread'inde yaparak ana ekranın (UI) donmasını engeller.
+
 class NetworkWorker(QThread):
     # Ana arayüze (client_main.py) göndereceğimiz özel PyQt sinyalleri
     connected_signal = pyqtSignal()
@@ -73,4 +76,4 @@ class NetworkWorker(QThread):
         """Bağlantıyı ve dinleme döngüsünü güvenli bir şekilde kapatır."""
         self.is_running = False
         if self.client_socket:
-            self.client_socket.close()
+            self.client_socket.close()

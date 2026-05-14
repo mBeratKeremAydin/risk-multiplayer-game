@@ -7,6 +7,9 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget,
 from PyQt5.QtCore import Qt
 from network_worker import NetworkWorker
 
+# Bu modül uygulamanın arayüz (GUI) olaylarını yönetir.
+# Kullanıcıdan gelen buton tıklamalarını okur ve NetworkWorker üzerinden sunucuya iletir.
+
 class RiskClientApp(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -18,16 +21,16 @@ class RiskClientApp(QMainWindow):
         self.worker.error_signal.connect(self.show_error)
         self.worker.message_received_signal.connect(self.handle_network_message)
         
-        # OYUNCU VE OYUN DURUMU DEĞİŞKENLERİ
+        # Kendi bilgilerimiz ve oyun durumu
         self.my_id = None
         self.my_nickname = None
         self.my_color = None
         
-        self.current_phase = "REINFORCEMENT"
-        self.is_my_turn = False
-        self.current_board = {} 
+        self.current_phase = "REINFORCEMENT" # Mevcut oyun evresi
+        self.is_my_turn = False              # Bizim sıramız mı?
+        self.current_board = {}              # Harita durumu
 
-        # --- KOMŞULUK TABLOSU ---
+        # Bölgelerin komşuluk grafı
         self.neighbors = {
             "0": ["1", "3", "26"], "1": ["0", "2", "3", "4"], "2": ["1", "4", "5", "19"],
             "3": ["0", "1", "4", "6"], "4": ["1", "2", "3", "5", "6", "7"], "5": ["2", "4", "7", "8"],
@@ -50,10 +53,10 @@ class RiskClientApp(QMainWindow):
             "34": ["32", "33", "35"], "35": ["32", "33", "34"]
         }
         
-        self.selected_attacker = None 
-        self.selected_defender = None 
+        self.selected_attacker = None # Seçilen kaynak bölge
+        self.selected_defender = None # Seçilen hedef bölge
 
-        self.node_buttons = {} 
+        self.node_buttons = {}        # Arayüzdeki butonları tutar
         self.stacked_widget = QStackedWidget()
         self.setCentralWidget(self.stacked_widget)
         
@@ -61,7 +64,7 @@ class RiskClientApp(QMainWindow):
         self.setup_lobby_page()
         self.setup_room_page()
         self.setup_game_page()
-        self.setup_gameover_page()   # Sayfa index: 4
+        self.setup_gameover_page()   
 
         self.stacked_widget.setCurrentIndex(0)
         self.worker.start()
@@ -164,7 +167,6 @@ class RiskClientApp(QMainWindow):
         self.stacked_widget.addWidget(page)
 
     def setup_gameover_page(self):
-        """Oyun bitiş ekranını Form/gameover_form.ui dosyasından yükler."""
         ui_path = os.path.join(os.path.dirname(__file__), "Form", "gameover_form.ui")
         if not os.path.exists(ui_path):
             raise FileNotFoundError("Form/gameover_form.ui bulunamadı.")
@@ -181,37 +183,26 @@ class RiskClientApp(QMainWindow):
         self.stacked_widget.addWidget(page)
 
     def show_gameover(self, winner_name):
-        """
-        Bitiş ekranını gösterir ve kazananın adını yazar.
-        Sunucudan gelen GAME_OVER mesajı ile tetiklenir.
-        """
         self.gameover_winner_label.setText(f"Kazanan: {winner_name}")
-        self.stacked_widget.setCurrentIndex(4)
+        self.stacked_widget.setCurrentIndex(4) # Bitiş ekranına geç
 
     def on_replay_clicked(self):
-        """
-        Yeniden Oyna butonu: oyun durumunu sıfırla ve lobi ekranına dön.
-        Renk (my_color) ve ID'nin tamamen sıfırlanmasına gerek yoktur, 
-        çünkü yeni odaya girip GAME_START mesajı alındığında üzerine yazılacaktır.
-        """
+        # Oyunu sıfırlayıp lobiye dönüyoruz
         self.current_phase = "REINFORCEMENT"
         self.is_my_turn = False
         self.current_board = {}
         self.selected_attacker = None
         self.selected_defender = None
         
-        # Seçili bölge renklerini sıfırla
         for btn in self.node_buttons.values():
-            btn.setStyleSheet("background-color: #DDDDDD;")
+            btn.setStyleSheet("background-color: #DDDDDD;") # Grafik sıfırla
             
-        # Odaya girildiğinde "Hazırım!" butonunu yeniden aktif et
         if hasattr(self, 'ready_btn'):
             self.ready_btn.setEnabled(True)
             self.ready_btn.setText("Hazırım!")
             
-        # Lobiye dönerken önceki oda kodunu temizle ki kazayla tekrar oraya girilmesin
         if hasattr(self, 'room_code_input'):
-            self.room_code_input.clear()
+            self.room_code_input.clear() # Lobi girişini temizle
             
         self.stacked_widget.setCurrentIndex(1)
 
@@ -254,11 +245,11 @@ class RiskClientApp(QMainWindow):
             border = ""
 
             if self.current_phase in ["REINFORCEMENT", "ATTACK", "FORTIFY"]:
-                if node_id == self.selected_attacker: # Seçilen Kaynak Bölge (veya saldıran)
-                    bg_color = "yellow"
+                if node_id == self.selected_attacker: 
+                    bg_color = "yellow" # Asıl nokta/Saldıran sarı olur
                     border = "border: 3px solid black;"
-                elif node_id == self.selected_defender: # Seçilen Hedef Bölge (veya savunan)
-                    bg_color = "purple"
+                elif node_id == self.selected_defender: 
+                    bg_color = "purple" # Hedeflenen siyah çerçeve ve mor olur
                     text_color = "white"
                     border = "border: 3px solid black;"
 
@@ -311,10 +302,9 @@ class RiskClientApp(QMainWindow):
                 else:
                     QMessageBox.warning(self, "Geçersiz Hedef", "Sadece saldıran bölgeye doğrudan komşu olan bir bölgeye saldırabilirsiniz!")
 
-        # YENİ EKLENEN FORTIFY (KAYDIRMA) EVRESİ TIKLAMA KONTROLLERİ
         elif self.current_phase == "FORTIFY":
             if is_my_territory:
-                # Henüz kaynak seçilmediyse veya kaynak değiştirilmek isteniyorsa
+                # Ya kaynak seçilmemiş, ya da sadece kendisi tıklanmış
                 if self.selected_attacker is None or (self.selected_attacker == node_id and self.selected_defender is None):
                     if self.current_board.get(node_id, {}).get("troops", 0) > 1:
                         self.selected_attacker = node_id
@@ -324,27 +314,23 @@ class RiskClientApp(QMainWindow):
                         if self.selected_attacker is None:
                             QMessageBox.warning(self, "Yetersiz Asker", "Asker kaydırabilmek için bölgede en az 2 askeriniz olmalı!")
                 
-                # Kaynak seçili ve farklı bir kendi bölgesi hedeflendiyse
+                # Başka yer hedeflendiyse soralım
                 elif self.selected_attacker != node_id:
                     self.selected_defender = node_id
                     self.refresh_board_ui()
                     
-                    # İki bölge de seçildi, oyuncuya kaç asker göndermek istediğini sor
                     source_troops = self.current_board.get(self.selected_attacker, {}).get("troops", 0)
-                    max_troops = source_troops - 1 # En az 1 asker kaynakta kalmalı
+                    max_troops = source_troops - 1 
                     
                     amount, ok = QInputDialog.getInt(
                         self, 
                         "Asker Kaydırma", 
                         f"Bölge {self.selected_attacker}'den Bölge {self.selected_defender}'e kaç asker göndermek istiyorsunuz?\n(Maksimum: {max_troops})", 
-                        1,          # Varsayılan değer
-                        1,          # Minimum değer
-                        max_troops, # Maksimum değer
-                        1           # Artış miktarı (step)
+                        1, 1, max_troops, 1 
                     )
                     
                     if ok:
-                        # Seçim onaylandıysa sunucuya mesaj yolla
+                        # Sunucuya kaydırma komutunu yollayalım
                         self.worker.send_message({
                             "action": "FORTIFY_MOVE",
                             "source": self.selected_attacker,
@@ -352,7 +338,7 @@ class RiskClientApp(QMainWindow):
                             "troops": amount
                         })
                     
-                    # İşlem tamamlansın veya iptal edilsin, seçimleri temizle
+                    # Sonunda sil
                     self.selected_attacker = None
                     self.selected_defender = None
                     self.refresh_board_ui()
@@ -381,7 +367,7 @@ class RiskClientApp(QMainWindow):
                 QMessageBox.warning(self, "Uyarı", "Lütfen önce saldıracak bölgenizi, sonra hedef bölgeyi seçin.")
 
         elif self.current_phase == "FORTIFY":
-            # Asker kaydırmak istemeyen kullanıcı doğrudan bu butona basarak sırayı rakibe salabilir.
+            # Pas geçmek için kullanılır
             self.worker.send_message({"action": "NEXT_PHASE"})
 
     # ================= 4. SUNUCUDAN GELENLERİ İŞLEME =================
@@ -467,7 +453,6 @@ class RiskClientApp(QMainWindow):
             self.update_action_button(self.current_phase)
             self.refresh_board_ui()
 
-        # YENİ EKLENEN SAVAŞ RAPORU YAKALAYICISI
         elif action == "BATTLE_REPORT":
             a_node = message.get("attacker_node")
             d_node = message.get("defender_node")
@@ -477,7 +462,7 @@ class RiskClientApp(QMainWindow):
             d_lost = message.get("d_lost", 0)
             conquered = message.get("conquered", False)
             
-            # Log metnini oluştur (HTML destekler, renklendirme yapabiliriz)
+            # HTML formatında savaş günlüğü oluşturuyoruz
             log_text = f"<b style='color:blue;'>Bölge {a_node}</b> ➔ <b style='color:red;'>Bölge {d_node}</b><br>"
             log_text += f"🗡️ Saldıran Zarları: <b>{a_rolls}</b><br>"
             log_text += f"🛡️ Savunan Zarları: <b>{d_rolls}</b><br>"
@@ -490,7 +475,7 @@ class RiskClientApp(QMainWindow):
             
             self.battle_log.append(log_text)
             
-            # Log eklendikçe otomatik olarak en alta kaydır
+            # Log kaydırıcısını en alta çek
             scrollbar = self.battle_log.verticalScrollBar()
             scrollbar.setValue(scrollbar.maximum())
 

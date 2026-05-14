@@ -4,6 +4,9 @@
 import random
 from models import Continent, Territory
 
+# Oyunun kurallarının işletildiği temel oyun motorudur. 
+# Zar takviyesi, harita kontrolleri ve asker dağıtımı gibi sunucu tarafı hesaplamaları burada yapılır.
+
 def start_turn(room):
     """
     Sırası gelen oyuncunun turunu başlatır, 

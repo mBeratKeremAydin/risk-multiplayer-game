@@ -4,6 +4,8 @@
 
 import uuid
 
+# Projede kullanılan veri yapılarını (Player, Room, Territory) tutan sınıf (Class) dosyasıdır.
+# Bu OOP yapısı sayesinde verilerin sunucu ile istemci arasında düzenli kalması sağlanır.
 
 # ==========================================
 # 1. OYUNCU SINIFI
