@@ -1,17 +1,34 @@
-# Risk-style multiplayer game: Python, TCP sockets, PyQt5
+# Risk: a two-player online version (Python, TCP sockets, PyQt5)
 
-A two-player, turn-based, Risk-style strategy game built for a Computer Networks course (April to May 2026) by **Emir Varol** and **Berat Kerem Aydın**. A multithreaded TCP server hosts the game rooms and enforces the rules; a PyQt5 client talks to it with newline-delimited JSON messages. The commit history of both authors is preserved.
+An unofficial, student-built online version of the board game **Risk**: two players conquer a world map by placing armies, attacking neighbouring territories with dice, and moving troops. It was built for a Computer Networks course (April to May 2026) by **Emir Varol** and **Berat Kerem Aydın**. A multithreaded TCP server hosts the game rooms and enforces the rules; a PyQt5 client talks to it with newline-delimited JSON messages. The commit history of both authors is preserved.
+
+> Risk is a trademark of Hasbro. This is an independent course project, not affiliated with or endorsed by Hasbro.
 
 ## Gameplay (as implemented in the server)
 
 - Two players per room. A room is identified by a 4-character code; both players press READY to start.
-- **Map:** 42 territories on 6 continents (neighbour graph in `Server.py`, `NEIGHBORS`). Owning a whole continent gives bonus troops: North America 4, South America 3, Africa 4, Europe 5, Asia 6, Australia 2.
+- **Map:** 42 territories on 6 continents with the same continent sizes as the classic board (North America 9, South America 4, Europe 7, Africa 6, Asia 12, Australia 4); the neighbour graph is in `Server.py` (`NEIGHBORS`). Owning a whole continent gives bonus troops (see the table below).
 - **Setup:** territories are split 21/21 at random; each player starts with 50 troops (at most 7 per territory); the first player is random.
 - **A turn has three timed phases:**
   1. *Reinforcement* (30 s): receive `max(3, owned territories / 3)` troops plus continent bonuses and place them one by one. Troops left unplaced when the time runs out are spread randomly.
   2. *Attack* (45 s): attack a neighbouring enemy territory. The attacker rolls up to 3 dice (at most troops − 1), the defender up to 2; the highest dice are compared pairwise and ties go to the defender. A conquest moves troops into the new territory.
   3. *Fortify* (30 s): move troops between your own territories if they are connected through a path of your own territories (breadth-first search). The move ends the turn.
 - You win by owning all 42 territories, or when your opponent disconnects.
+
+### Differences from the board game
+
+- Exactly two players per room; automatic setup; per-phase time limits.
+- No territory cards and no mission cards.
+- Continent bonuses differ from the classic values (classic values as listed on [Wikipedia](https://en.wikipedia.org/wiki/Risk_(game))):
+
+| Continent | Classic game | This implementation |
+|---|---|---|
+| North America | 5 | 4 |
+| South America | 2 | 3 |
+| Europe | 5 | 5 |
+| Africa | 3 | 4 |
+| Asia | 7 | 6 |
+| Australia | 2 | 2 |
 
 ## Architecture
 
@@ -47,7 +64,7 @@ The client connects to `127.0.0.1` by default; set the `RISK_SERVER_HOST` enviro
 
 ## Türkçe özet
 
-Bilgisayar Ağları dersi için Emir Varol ve Berat Kerem Aydın'ın geliştirdiği, iki kişilik, sıra tabanlı Risk benzeri bir strateji oyunu. Çok iş parçacıklı bir TCP sunucusu odaları ve kuralları yönetir (42 bölge, 6 kıta, takviye/saldırı/kaydırma evreleri, zar savaşları, süre sayacı); PyQt5 istemcisi sunucuyla satır başına bir JSON mesajıyla konuşur. Sunucu akışı iki betikli istemciyle yerelde doğrulandı; arayüz çalıştırılmadı. Kilit (lock) kullanılmaması gibi bilinen sınırlar yukarıda listelenmiştir.
+Bilgisayar Ağları dersi için Emir Varol ve Berat Kerem Aydın'ın geliştirdiği, **Risk** masa oyununun iki kişilik çevrimiçi uygulaması (resmi değildir). Çok iş parçacıklı bir TCP sunucusu odaları ve kuralları yönetir (42 bölge, 6 kıta, takviye/saldırı/kaydırma evreleri, zar savaşları, süre sayacı); PyQt5 istemcisi sunucuyla satır başına bir JSON mesajıyla konuşur. Oyunda iki oyuncu, bölge/görev kartları ve klasik kıta bonus değerleri yoktur. Sunucu akışı iki betikli istemciyle yerelde doğrulandı; arayüz çalıştırılmadı. Kilit (lock) kullanılmaması gibi bilinen sınırlar yukarıda listelenmiştir.
 
 ## License
 
