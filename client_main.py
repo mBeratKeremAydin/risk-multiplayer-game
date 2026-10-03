@@ -16,7 +16,7 @@ class RiskClientApp(QMainWindow):
         self.setWindowTitle("Risk Oyunu - Multiplayer")
         self.resize(1100, 700) # Log ekranı sığsın diye genişliği biraz artırdık
         
-        self.worker = NetworkWorker(host='127.0.0.1', port=5555)
+        self.worker = NetworkWorker(host=os.environ.get('RISK_SERVER_HOST', '127.0.0.1'), port=5555)
         self.worker.connected_signal.connect(self.on_connected)
         self.worker.error_signal.connect(self.show_error)
         self.worker.message_received_signal.connect(self.handle_network_message)
