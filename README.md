@@ -1,6 +1,6 @@
 # Risk: a two-player online version (Python, TCP sockets, PyQt5)
 
-An unofficial, student-built online version of the board game **Risk**: two players conquer a world map by placing armies, attacking neighbouring territories with dice, and moving troops. It was built for a Computer Networks course (April to May 2026) by **Emir Varol** and **Berat Kerem Aydın**. A multithreaded TCP server hosts the game rooms and enforces the rules; a PyQt5 client talks to it with newline-delimited JSON messages. The commit history of both authors is preserved.
+An unofficial, student-built online version of the board game **Risk**: two players conquer a world map by placing armies, attacking neighbouring territories with dice, and moving troops. It was built for a Computer Networks course (April to May 2026). A multithreaded TCP server hosts the game rooms and enforces the rules; a PyQt5 client talks to it with newline-delimited JSON messages.
 
 > Risk is a trademark of Hasbro. This is an independent course project, not affiliated with or endorsed by Hasbro.
 
@@ -64,7 +64,7 @@ The client connects to `127.0.0.1` by default; set the `RISK_SERVER_HOST` enviro
 
 ## Türkçe özet
 
-Bilgisayar Ağları dersi için Emir Varol ve Berat Kerem Aydın'ın geliştirdiği, **Risk** masa oyununun iki kişilik çevrimiçi uygulaması (resmi değildir). Çok iş parçacıklı bir TCP sunucusu odaları ve kuralları yönetir (42 bölge, 6 kıta, takviye/saldırı/kaydırma evreleri, zar savaşları, süre sayacı); PyQt5 istemcisi sunucuyla satır başına bir JSON mesajıyla konuşur. Oyunda iki oyuncu, bölge/görev kartları ve klasik kıta bonus değerleri yoktur. Sunucu akışı iki betikli istemciyle yerelde doğrulandı; arayüz çalıştırılmadı. Kilit (lock) kullanılmaması gibi bilinen sınırlar yukarıda listelenmiştir.
+Bilgisayar Ağları dersi için geliştirilen, **Risk** masa oyununun iki kişilik çevrimiçi uygulaması (resmi değildir). Çok iş parçacıklı bir TCP sunucusu odaları ve kuralları yönetir (42 bölge, 6 kıta, takviye/saldırı/kaydırma evreleri, zar savaşları, süre sayacı); PyQt5 istemcisi sunucuyla satır başına bir JSON mesajıyla konuşur. Oyunda iki oyuncu, bölge/görev kartları ve klasik kıta bonus değerleri yoktur. Sunucu akışı iki betikli istemciyle yerelde doğrulandı; arayüz çalıştırılmadı. Kilit (lock) kullanılmaması gibi bilinen sınırlar yukarıda listelenmiştir.
 
 ## License
 
